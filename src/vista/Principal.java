@@ -2,17 +2,22 @@ package vista;
 
 import controlador.GestorBaseDatos;
 import javax.swing.DefaultListModel;
-import modelo.Empleado;
+import modelo.*;
 
 public class Principal extends javax.swing.JFrame {
     private GestorBaseDatos g;
-    DefaultListModel modelo = new DefaultListModel();
+    DefaultListModel modeloPersonal = new DefaultListModel();
+    DefaultListModel modeloTareas = new DefaultListModel();
     public Principal() {
         initComponents();
         g = new GestorBaseDatos();
-        lstPersonal.setModel(modelo);
+        lstPersonal.setModel(modeloPersonal);
         for (Empleado e : g.listadoEmpleados()) {
-            modelo.addElement(e);
+            modeloPersonal.addElement(e);
+        }
+        lstTareas.setModel(modeloTareas);
+        for (Tarea ta : g.listadoTareas()) {
+            modeloTareas.addElement(ta);
         }
     }
 
@@ -38,23 +43,23 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(10, 11, 0, 0);
 
-        btnAgregarPersona.setText("Agregar personal");
+        btnAgregarPersona.setText("Gestionar personal");
         btnAgregarPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarPersonaActionPerformed(evt);
             }
         });
         getContentPane().add(btnAgregarPersona);
-        btnAgregarPersona.setBounds(30, 390, 140, 23);
+        btnAgregarPersona.setBounds(20, 390, 160, 23);
 
-        btnAgregarTarea.setText("Agregar tarea");
+        btnAgregarTarea.setText("Gestionar tarea");
         btnAgregarTarea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarTareaActionPerformed(evt);
             }
         });
         getContentPane().add(btnAgregarTarea);
-        btnAgregarTarea.setBounds(260, 390, 140, 23);
+        btnAgregarTarea.setBounds(250, 390, 160, 23);
 
         btnAsignarTareas.setText("Asignar tareas");
         getContentPane().add(btnAsignarTareas);
@@ -65,11 +70,6 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(20, 80, 160, 297);
 
-        lstTareas.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(lstTareas);
 
         getContentPane().add(jScrollPane2);

@@ -11,6 +11,11 @@ public class Tarea {
         this.descripcion = descripcion;
     }
 
+    public Tarea(String tarea, String descripcion) {
+        this.tarea = tarea;
+        this.descripcion = descripcion;
+    }
+    
     public int getIdTarea() {
         return idTarea;
     }
@@ -37,6 +42,6 @@ public class Tarea {
 
     @Override
     public String toString() {
-        return "Tarea{" + "idTarea=" + idTarea + ", tarea=" + tarea + ", descripcion=" + descripcion + '}';
+        return this.tarea;
     }
 }

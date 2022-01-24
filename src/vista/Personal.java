@@ -119,7 +119,7 @@ public class Personal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnGuardarCambios);
-        btnGuardarCambios.setBounds(143, 220, 140, 23);
+        btnGuardarCambios.setBounds(140, 220, 140, 23);
 
         setBounds(0, 0, 682, 303);
     }// </editor-fold>//GEN-END:initComponents

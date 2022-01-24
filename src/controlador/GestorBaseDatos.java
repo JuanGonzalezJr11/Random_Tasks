@@ -114,5 +114,58 @@ public class GestorBaseDatos {
             cerrarConexion();
         }
     }
+    public ArrayList<Tarea> listadoTareas(){
+        ArrayList<Tarea> lista = new ArrayList<>();
+        try {
+            abrirConexion();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM Tareas");
+            while(rs.next()){
+                int idTarea = rs.getInt("idTarea");
+                String tarea = rs.getString("tarea");
+                String descripcion = rs.getString("descripcion");
+                lista.add(new Tarea(idTarea, tarea, descripcion));
+            }
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally{
+            cerrarConexion();
+        }
+        return lista;
+    }
+    public boolean modificarTarea(Tarea t){
+        boolean resultado = false;
+        try {
+            abrirConexion();
+            PreparedStatement ps = con.prepareStatement("UPDATE Tareas SET tarea = ?, descripcion = ? WHERE idTarea = ?");
+            ps.setString(1, t.getTarea());
+            ps.setString(2, t.getDescripcion());
+            ps.setInt(3, t.getIdTarea());
+            ps.executeUpdate();
+            resultado = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally{
+            cerrarConexion();
+        }
+        return resultado;
+    }
+    public void borrarTarea(int idTarea){
+        try {
+            abrirConexion();
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Tareas WHERE idTarea = ?");
+            ps.setInt(1, idTarea);
+            ps.executeUpdate();
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally{
+            cerrarConexion();
+        }
+    }
 }
 
